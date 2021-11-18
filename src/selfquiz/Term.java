@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Term
 {
     private String term;
+    private String type;
     
     private ArrayList<String> basicHints;
     private ArrayList<String> intermediateHints;
@@ -26,9 +27,10 @@ public class Term
     private boolean keyPhrasesExclusionary;
     
     
-    Term(String term, ArrayList<String> basicHints, ArrayList<String> intermediateHints, ArrayList<String> advancedHints, ArrayList<String> keyPhrases, ArrayList<String> promptPhrases, ArrayList<String> wrongPhrases, boolean keyPhrasesExclusionary)
+    Term(String term, String type, ArrayList<String> basicHints, ArrayList<String> intermediateHints, ArrayList<String> advancedHints, ArrayList<String> keyPhrases, ArrayList<String> promptPhrases, ArrayList<String> wrongPhrases, boolean keyPhrasesExclusionary)
     {
         this.term = term;
+        this.type = type;
         
         this.basicHints = basicHints;
         this.intermediateHints = intermediateHints;
@@ -43,6 +45,7 @@ public class Term
     
     
     public String getTerm() { return term; }
+    public String getType() { return type; }
     
     public ArrayList<String> getBasicHints() { return basicHints; }
     public ArrayList<String> getIntermediateHints() { return intermediateHints; }
