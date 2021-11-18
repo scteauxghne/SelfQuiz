@@ -13,10 +13,12 @@ import java.util.ArrayList;
  */
 public class Deck
 {
+    private String name;
     private ArrayList<Term> terms;
     
-    Deck(ArrayList<Term> terms) { this.terms = terms; }
+    Deck(String name, ArrayList<Term> terms) { this.name = name; this.terms = terms; }
     
+    public String getName() { return name; }
     public ArrayList<Term> getTerms() { return terms; }
     public int size() { return terms.size(); }
 }
