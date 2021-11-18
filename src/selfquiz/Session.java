@@ -16,6 +16,7 @@ public class Session
     private int startingTerms;
     private ArrayList<Term> remainingTerms;
     private ArrayList<Term> termLog;
+    private term currentTerm;
     
     Session(ArrayList<Deck> decks)
     {
@@ -49,4 +50,14 @@ public class Session
     public int getStartingTerms() { return startingTerms; }
     public ArrayList<Term> getRemainingTerms() { return remainingTerms; }
     public ArrayList<Term> getTermLog() { return termLog; }
+    public void getNewTerm()
+    {
+        currentTerm = (int)(Math.random * (remainingTerms.size() -1));
+    }
+    public term getCurrentTerm() { return currentTerm; }
+    public void useTerm(term t)
+    {
+        remainingTerms.remove(t);
+        termLog.add(t);
+    }
 }
