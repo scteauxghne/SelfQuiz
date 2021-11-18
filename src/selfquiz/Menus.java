@@ -36,6 +36,7 @@ public class Menus
         if (input == "2") { return 1; }
         else { return -1; }
     }
+    
     public void commandsMenu() // 1
     {
         System.out.println("---Commands---");
@@ -43,6 +44,42 @@ public class Menus
         System.out.println("1. Back");
     }
     public int commandsMenuCommand(String input)
+    {
+        if (input == "1") { return 0; }
+        else { return -1; }
+    }
+    
+    public void setupMenu(ArrayList<deck> decks, ArrayList<deck> selectedDecks) // 2
+    {
+        System.out.println("--- Game Setup ---");
+        if (decks.size() > 0)
+        }
+            System.out.println();
+            System.out.println("< Loaded Decks >");
+            for (int i = 0; i < decks.size(); i++)
+            {
+                System.out.println((i + 1) + ". " + decks.get(i).getName());
+            }
+        }
+        else
+        {
+            System.out.println();
+            System.out.println("No decks loaded");
+        }
+        if (selectedDecks.size() > 0)
+        {
+            System.out.println();
+            System.out.println("< Selected Decks >");
+            for (int i = 0; i < session.getRemainingTerms.size(); i++)
+            {
+                System.out.println((decks.size() + i + 1) + ". " + selectedDecks.get(i).getName());
+            }
+        }
+        System.out.println();
+        System.out.println("Continue [ENTER]");
+        System.out.println("Back [/"BACK/"]");
+    }
+    public int setupMenuCommand(String input)
     {
         if (input == "1") { return 0; }
         else { return -1; }
