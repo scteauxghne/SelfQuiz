@@ -11,15 +11,29 @@ package selfquiz;
  */
 public class Menus
 {
+    public static boolean isNumeric(String str)
+    { 
+        try
+        {  
+            Integer.parseInt(str);  
+            return true;
+        }   
+        catch(NumberFormatException e)
+        {  
+            return false;  
+        }  
+    }   
     public void menuSelector(int i)
     {
         if (i == 0) { mainMenu(); }
         if (i == 1) { commandsMenu(); }
+        if (i == 2) { setupMenu(); }
     }
     public int commander(int i, String input)
     {
         if (i == 0) { return mainMenuCommand(input); } else { return -1; }
         if (i == 1) { return commandsMenuCommand(input); } else { return -1; }
+        if (i == 2) { return setupMenuCommand(input); } else { return -1; }
     }
     public void mainMenu() // 0
     {
@@ -32,8 +46,8 @@ public class Menus
     }
     public int mainMenuCommand(String input)
     {
-        if (input == "1") { return 2; }
-        if (input == "2") { return 1; }
+        if (input.equals("1")) { return 2; }
+        if (input.equals("2")) { return 1; }
         else { return -1; }
     }
     
@@ -49,16 +63,21 @@ public class Menus
         else { return -1; }
     }
     
-    public void setupMenu(ArrayList<deck> decks, ArrayList<deck> selectedDecks) // 2
+    private ArrayList<deck> setupDecks = new ArrayList<deck>();
+    public void importDecks(ArrayList<decks> decks) { setupDecks = decks; }
+    private ArrayList<deck> setupSelectedDecks = new ArrayList<deck>();
+    public ArrayList<decks> getSelected() { return setupSelectedDecks; }
+    
+    public void setupMenu() // 2
     {
         System.out.println("--- Game Setup ---");
-        if (decks.size() > 0)
+        if (setupDecks.size() > 0)
         }
             System.out.println();
             System.out.println("< Loaded Decks >");
-            for (int i = 0; i < decks.size(); i++)
+            for (int i = 0; i < setupDecks.size(); i++)
             {
-                System.out.println((i + 1) + ". " + decks.get(i).getName());
+                System.out.println((i + 1) + ". " + setupDecks.get(i).getName());
             }
         }
         else
@@ -66,22 +85,40 @@ public class Menus
             System.out.println();
             System.out.println("No decks loaded");
         }
-        if (selectedDecks.size() > 0)
+        if (setupSelectedDecks.size() > 0)
         {
             System.out.println();
             System.out.println("< Selected Decks >");
-            for (int i = 0; i < session.getRemainingTerms.size(); i++)
+            for (int i = 0; i < setupSelectedDecks.size(); i++)
             {
-                System.out.println((decks.size() + i + 1) + ". " + selectedDecks.get(i).getName());
+                System.out.println((setupDecks.size() + i + 1) + ". " + selectedDecks.get(i).getName());
             }
         }
         System.out.println();
         System.out.println("Continue [ENTER]");
-        System.out.println("Back [/"BACK/"]");
+        System.out.println("Back [/"B/"]");
     }
-    public int setupMenuCommand(String input)
+    public int setupMenuCommand(ArrayList<deck> decks, ArrayList<deck> selectedDecks, String input)
     {
-        if (input == "1") { return 0; }
-        else { return -1; }
+        if (input.equals("")) { return 3; }
+        else if (input.toLowerCase().equals("b")) { return 0; }
+        else if (isNumeric(input) == true)
+        {
+            if (Integer.parseInt(input) > 0 && Integer.parseInt(input) <= setupDecks.size() + setupSelectedDecks.size())
+            {
+                if (Integer.parseInt(input) <= setupDecks.size())
+                {
+                    setupSelectedDecks.add(setupDecks.get(Integer.parseInt(input) - 1));
+                    setupDecks.remove(setupDecks.get(Integer.parseInt(input) - 1));
+                }
+                else
+                {
+                    setupDecks.add(selectedDecks.get(setupSelectedDecks.get(Integer.parseInt(input) - 1 - setupDecks.size()));
+                    setupSelectedDecks.remove(setupSelectedDecks.get(Integer.parseInt(input) - 1 - setupDecks.size()));
+                }
+            }
+            return 2;
+        }
+        else { return 2; }
     }
 }
