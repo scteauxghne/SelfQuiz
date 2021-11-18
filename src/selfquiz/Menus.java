@@ -95,12 +95,16 @@ public class Menus
             }
         }
         System.out.println();
-        System.out.println("Continue [ENTER]");
+        System.out.println("Start Game [ENTER]");
         System.out.println("Back [/"B/"]");
     }
     public int setupMenuCommand(ArrayList<deck> decks, ArrayList<deck> selectedDecks, String input)
     {
-        if (input.equals("")) { return 3; }
+        if (input.equals(""))
+        {
+            Session session = new Session(setupSelectedDecks);
+            return 3;
+        }
         else if (input.toLowerCase().equals("b")) { return 0; }
         else if (isNumeric(input) == true)
         {
@@ -120,5 +124,16 @@ public class Menus
             return 2;
         }
         else { return 2; }
+    }
+    public void activeGameMenu(Session s) // 3
+    {
+        System.out.println( "(" + (s.getStartingTerms() - (s.getStartingTerms() - s.getRemainingTerms())) + "/" + s.getStartingTerms() + ")" );
+        System.out.println();
+        //System.out.println("1. Back");
+    }
+    public int activeGameMenuCommand(Session s, String input)
+    {
+        //if (input == "1") { return 0; }
+        //else { return -1; }
     }
 }
