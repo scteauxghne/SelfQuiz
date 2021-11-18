@@ -129,7 +129,7 @@ public class Menus
     {
         System.out.println( "(" + (s.getStartingTerms() - (s.getStartingTerms() - s.getRemainingTerms())) + "/" + s.getStartingTerms() + ")" );
         System.out.println();
-        //System.out.println("1. Back");
+        System.out.println("Question " + (s.getStartingTerms() - (s.getStartingTerms() - s.getRemainingTerms())) + ": (" + s.getType() + ")" );
     }
     public int activeGameMenuCommand(Session s, String input)
     {
